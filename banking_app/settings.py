@@ -18,7 +18,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,bank-system-r98n.onrender.com').split(',')
 
 # CSRF Trusted Origins
-CSRF_TRUSTED_ORIGINS = os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS', 'https://bank-system-1-qobi.onrender.com').split(',')
+CSRF_TRUSTED_ORIGINS = os.environ.get('DJANGO_CSRF_TRUSTED_ORIGINS', 'https://bank-system-1-qobi.onrender.com,bank-system-3-1twj.onrender.com').split(',')
 
 # Application definition
 INSTALLED_APPS = [
