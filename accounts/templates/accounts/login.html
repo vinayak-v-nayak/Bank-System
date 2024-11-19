@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'accounts/css/styles.css' %}">
+    <title>Login</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #f8f9fa; /* Light text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full height */
+            margin: 0;
+        }
+
+        h2 {
+            color: #ff6f61; /* Coral color for headings */
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+        }
+
+        /* Form Styles */
+        form {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a); /* Dark gradient for form */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1); /* Shadow for depth */
+            width: 300px; /* Fixed width for the form */
+        }
+
+        /* Input Styles */
+        input[type="text"],
+        input[type="password"] {
+            width: 100%; /* Full width */
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: #2a2a2a; /* Darker gray for inputs */
+            color: #ffffff; /* White text color */
+            transition: background-color 0.3s, box-shadow 0.3s; /* Transition for inputs */
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            background: #3a3a3a; /* Lighter gray on focus */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Glow effect on focus */
+            outline: none; /* Remove outline */
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #ff6f61; /* Coral button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Transition for button effects */
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%; /* Full width button */
+        }
+
+        button:hover {
+            background-color: #ff4f40; /* Darker coral on hover */
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+        }
+
+        /* Animation for Fade In Effect */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
