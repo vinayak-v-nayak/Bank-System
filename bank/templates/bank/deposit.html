@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deposit Money</title>
+    <link rel="stylesheet" href="{% static 'bank/styles.css' %}">
+    <style>
+        /* Deposit Money Page */
+.deposit-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.deposit-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.deposit-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.deposit-container form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.deposit-container label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.deposit-container input, .deposit-container button {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+}
+
+.deposit-container input:focus, .deposit-container button:focus {
+    border-color: #4682B4;
+    outline: none;
+}
+
+.deposit-container button {
+    background-color: #4682B4;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.deposit-container button:hover {
+    background-color: #5a8abf;
+}
+
+.deposit-container .form-group input {
+    width: 100%;
+}
+
+.deposit-container .balance-info {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.deposit-container .back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.deposit-container .back-link a {
+    color: #4682B4;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.deposit-container .back-link a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="deposit-container">
+        <h1>Deposit Money</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <!-- Deposit form fields (e.g., deposit amount) -->
+                {{ form.as_p }}
+            </div>
+            
+            <button type="submit">Deposit</button>
+        </form>
+
+        <div class="balance-info">
+            <p>Your current balance: ₹{{ account.balance }}</p>
+        </div>
+
+        <div class="back-link">
+            <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+</html>

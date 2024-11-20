@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Service Requests</title>
+    <link rel="stylesheet" href="{% static 'bank/styles.css' %}">
+    <style>
+        /* Service Requests Page Styling */
+        .service-requests-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-requests-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .service-requests-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .service-requests-container th, .service-requests-container td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+
+        .service-requests-container th {
+            background-color: #4682B4;
+            color: white;
+            font-weight: bold;
+        }
+
+        .service-requests-container td {
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        .service-requests-container tr:nth-child(even) td {
+            background-color: #f1f1f1;
+        }
+
+        .service-requests-container td:hover {
+            background-color: #f1f1f1;
+        }
+
+        .service-requests-container p {
+            text-align: center;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #4682B4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="service-requests-container">
+        <h2>My Service Requests</h2>
+
+        {% if user_requests %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service Type</th>
+                        <th>Status</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in user_requests %}
+                        <tr>
+                            <td>{{ request.service_type }}</td>
+                            <td>{{ request.status }}</td>
+                            <td>{{ request.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>You have not made any service requests yet.</p>
+        {% endif %}
+
+        <div class="back-link">
+            <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+</html>

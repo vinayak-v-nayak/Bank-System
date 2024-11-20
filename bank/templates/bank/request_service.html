@@ -1,0 +1,183 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Request Form</title>
+    <link rel="stylesheet" href="{% static 'bank/styles.css' %}">
+    <style>
+        /* Service Request Form Styling */
+        .service-request-form-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-request-form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .service-request-form-container label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .service-request-form-container select, 
+        .service-request-form-container input[type="text"], 
+        .service-request-form-container input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .service-specific-fields {
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .service-request-form-container button {
+            background-color: #4682B4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .service-request-form-container button:hover {
+            background-color: #365f75;
+        }
+
+        .service-request-form-container .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .service-request-form-container .back-link a {
+            color: #4682B4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .service-request-form-container .back-link a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="service-request-form-container">
+        <h2>Service Request Form</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <label for="id_service_type">Service Type:</label>
+            {{ form.service_type }}
+            
+            <div id="cheque_book_fields" class="service-specific-fields">
+                <div>
+                    <label for="id_cheque_leaves">Cheque Leaves:</label>
+                    {{ form.cheque_leaves }}
+                </div>
+            </div>
+            
+            <div id="credit_card_fields" class="service-specific-fields">
+                <div>
+                    <label for="id_card_type">Card Type:</label>
+                    {{ form.card_type }}
+                </div>
+            </div>
+            
+            <div id="address_change_fields" class="service-specific-fields">
+                <div>
+                    <label for="id_new_address">New Address:</label>
+                    {{ form.new_address }}
+                </div>
+            </div>
+            
+            <div id="transaction_limit_fields" class="service-specific-fields">
+                <div>
+                    <label for="id_new_limit">New Limit:</label>
+                    {{ form.new_limit }}
+                </div>
+            </div>
+            
+            <div id="loan_inquiry_fields" class="service-specific-fields">
+                <div>
+                    <label for="id_loan_amount">Loan Amount:</label>
+                    {{ form.loan_amount }}
+                </div>
+                <div>
+                    <label for="id_loan_term">Loan Term:</label>
+                    {{ form.loan_term }}
+                </div>
+            </div>
+            
+            <button type="submit">Submit Request</button>
+        </form>
+
+        <div class="back-link">
+            <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        // Get the service type field and the service-specific sections
+        const serviceTypeField = document.getElementById('id_service_type');
+        const chequeBookFields = document.getElementById('cheque_book_fields');
+        const creditCardFields = document.getElementById('credit_card_fields');
+        const addressChangeFields = document.getElementById('address_change_fields');
+        const transactionLimitFields = document.getElementById('transaction_limit_fields');
+        const loanInquiryFields = document.getElementById('loan_inquiry_fields');
+
+        // Function to hide all service-specific fields
+        function hideAllFields() {
+            chequeBookFields.style.display = 'none';
+            creditCardFields.style.display = 'none';
+            addressChangeFields.style.display = 'none';
+            transactionLimitFields.style.display = 'none';
+            loanInquiryFields.style.display = 'none';
+        }
+
+        // Event listener for when the service type changes
+        serviceTypeField.addEventListener('change', function() {
+            hideAllFields(); // Hide all fields first
+            
+            const selectedService = serviceTypeField.value; // Get the selected service type
+            
+            // Show the corresponding fields based on selected service type
+            if (selectedService === 'Cheque Book') {
+                chequeBookFields.style.display = 'block';
+            } else if (selectedService === 'Credit/Debit Card') {
+                creditCardFields.style.display = 'block';
+            } else if (selectedService === 'Address Change') {
+                addressChangeFields.style.display = 'block';
+            } else if (selectedService === 'Transaction Limit') {
+                transactionLimitFields.style.display = 'block';
+            } else if (selectedService === 'Loan Inquiry') {
+                loanInquiryFields.style.display = 'block';
+            }
+        });
+
+        // Trigger change event on page load in case the form is pre-filled
+        if (serviceTypeField.value) {
+            serviceTypeField.dispatchEvent(new Event('change'));
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'bank/styles.css' %}">
+    <style>
+        /* Basic Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fa; /* Light background */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Profile Section */
+.profile-details {
+    margin-bottom: 40px;
+}
+
+.profile-section {
+    margin-bottom: 20px;
+}
+
+.profile-section p {
+    font-size: 1.1rem;
+    color: #555;
+    margin: 10px 0;
+}
+
+.actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.actions .btn-custom,
+.actions .btn-secondary {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #5A9BD5; /* Medium Blue */
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 15px;  /* Space between buttons */
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.actions .btn-custom:hover {
+    background-color: #4179B0; /* Slightly darker blue */
+}
+
+.actions .btn-secondary {
+    background-color: #777;
+}
+
+.actions .btn-secondary:hover {
+    background-color: #555; /* Darker grey */
+}
+
+/* Button Styles for Back to Dashboard */
+a.btn-custom,
+a.btn-secondary {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #5A9BD5;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+a.btn-custom:hover,
+a.btn-secondary:hover {
+    background-color: #4179B0;
+}
+
+.actions .btn-secondary {
+    background-color: #6c757d;
+}
+
+.actions .btn-secondary:hover {
+    background-color: #565e64;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="page-title">Profile Page</h1>
+        </header>
+
+        <div class="profile-details">
+            <div class="profile-section">
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+                <p><strong>Address:</strong> {{ profile.address }}</p>
+            </div>
+
+            <div class="actions">
+                <a href="{% url 'update_profile' %}" class="btn btn-custom">Update Profile</a>
+                <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

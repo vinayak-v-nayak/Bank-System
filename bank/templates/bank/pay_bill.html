@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay Bill</title>
+    <link rel="stylesheet" href="{% static 'bank/styles.css' %}">
+    <style>
+        /* Pay Bill Page Styling */
+.pay-bill-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pay-bill-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.pay-bill-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pay-bill-container label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.pay-bill-container input, .pay-bill-container button {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+}
+
+.pay-bill-container input:focus, .pay-bill-container button:focus {
+    border-color: #4682B4;
+    outline: none;
+}
+
+.pay-bill-container button {
+    background-color: #4682B4;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pay-bill-container button:hover {
+    background-color: #5a8abf;
+}
+
+.pay-bill-container .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pay-bill-container .form-group input {
+    width: 100%;
+}
+
+.pay-bill-container .back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pay-bill-container .back-link a {
+    color: #4682B4;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.pay-bill-container .back-link a:hover {
+    text-decoration: underline;
+}
+
+.pay-bill-container .message-list {
+    margin-bottom: 20px;
+    list-style: none;
+    padding-left: 0;
+}
+
+.pay-bill-container .message-list li {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="pay-bill-container">
+        <h1>Pay Bill</h1>
+
+        <!-- Display messages if any -->
+        {% if messages %}
+            <ul class="message-list">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <!-- Form for paying bills -->
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="biller_name">Biller Name:</label>
+                {{ form.biller_name }}
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                {{ form.amount }}
+            </div>
+
+            <div class="form-group">
+                <label for="due_date">Due Date:</label>
+                {{ form.due_date }}
+            </div>
+
+            <button type="submit">Pay Bill</button>
+        </form>
+
+        <div class="back-link">
+            <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+        </div>
+    </div>
+
+</body>
+</html>

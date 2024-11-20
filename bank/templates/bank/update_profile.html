@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="{% static 'bank/styles.css' %}">
+    <style>
+        /* Update Profile Page */
+.update-profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.update-profile-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.update-profile-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.update-profile-container form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.update-profile-container label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.update-profile-container input, .update-profile-container button {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+}
+
+.update-profile-container input:focus, .update-profile-container button:focus {
+    border-color: #4682B4;
+    outline: none;
+}
+
+.update-profile-container button {
+    background-color: #4682B4;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.update-profile-container button:hover {
+    background-color: #5a8abf;
+}
+
+.update-profile-container .form-group input {
+    width: 100%;
+}
+
+.update-profile-container .back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.update-profile-container .back-link a {
+    color: #4682B4;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.update-profile-container .back-link a:hover {
+    text-decoration: underline;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="update-profile-container">
+        <h1>Update Profile</h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <!-- Update User model (username and email) -->
+                <label for="username">Username</label>
+                {{ user_form.username }}
+                <label for="email">Email</label>
+                {{ user_form.email }}
+            </div>
+
+            <div class="form-group">
+                <!-- Update UserProfile model (phone_number and address) -->
+                <label for="phone_number">Phone Number</label>
+                {{ profile_form.phone_number }}
+                <label for="address">Address</label>
+                {{ profile_form.address }}
+            </div>
+
+            <button type="submit">Update Profile</button>
+        </form>
+
+        <div class="back-link">
+            <a href="{% url 'profile' %}">Back to Profile</a>
+        </div>
+    </div>
+
+</body>
+</html>
